@@ -72,6 +72,14 @@ class User extends Authenticatable implements JWTSubject
     ];
 
     /**
+     * @param $password
+     */
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes["password"] = \Hash::make($password);
+    }
+
+    /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
      * @return mixed
