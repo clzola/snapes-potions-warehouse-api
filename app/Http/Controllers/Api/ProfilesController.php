@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateProfilePasswordRequest;
+use App\Http\Requests\UpdateProfilePictureRequest;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Http\Resources\ProfileResource;
+use App\Services\StoreProfilePictureService;
 
 class ProfilesController extends Controller
 {
@@ -34,7 +36,7 @@ class ProfilesController extends Controller
         /** @var \App\User $user */
         $user = auth('api')->user();
 
-        if(!\Hash::check($request->get('old_password'), $user->password)) {
+        if (!\Hash::check($request->get('old_password'), $user->password)) {
             throw new \Exception("Incorrect old password.");
         }
 
@@ -42,5 +44,35 @@ class ProfilesController extends Controller
         $user->save();
 
         return response()->noContent();
+    }
+
+
+    /**
+     * @param UpdateProfilePictureRequest $request
+     * @param StoreProfilePictureService $service
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     * @throws \Throwable
+     */
+    public function updateProfilePicture(UpdateProfilePictureRequest $request, StoreProfilePictureService $service)
+    {
+        /** @var \App\User $user */
+        $profilePictureFileName = $service->store(
+            $request->file("profile_picture"),
+            $request->get('profile_picture_crop', null)
+        );
+
+        $user = auth('api')->user();
+
+        \DB::transaction(function() use ($user, $profilePictureFileName) {
+            $oldProfilePictureFilename = $user->profile_picture;
+            $user->profile_picture = $profilePictureFileName;
+            $user->save();
+            \Storage::delete("public/users/profile_pictures/$oldProfilePictureFilename");
+        });
+
+        return response()->json([
+            "profile_picture_url" => url("storage/users/profile_pictures/{$user->profile_picture}")
+        ]);
     }
 }
