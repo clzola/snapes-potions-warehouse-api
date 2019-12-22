@@ -57,12 +57,12 @@ class ProfilesController extends Controller
     public function updateProfilePicture(UpdateProfilePictureRequest $request, StoreProfilePictureService $service)
     {
         /** @var \App\User $user */
+        $user = auth('api')->user();
+
         $profilePictureFileName = $service->store(
             $request->file("profile_picture"),
             $request->get('profile_picture_crop', null)
         );
-
-        $user = auth('api')->user();
 
         \DB::transaction(function() use ($user, $profilePictureFileName) {
             $oldProfilePictureFilename = $user->profile_picture;
