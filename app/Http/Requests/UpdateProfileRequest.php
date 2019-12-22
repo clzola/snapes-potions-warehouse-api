@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateProfileRequest extends FormRequest
 {
@@ -24,10 +25,18 @@ class UpdateProfileRequest extends FormRequest
      */
     public function rules()
     {
+        $user = auth('api')->user();
+
         return [
             "title" => "required|string|max:250",
             "name" => "required|string|max:250",
-            "email" => "required|string|email|max:250|unique:users,email",
+            "email" => [
+                "required",
+                "string",
+                "email",
+                "max:250",
+                Rule::unique("users")->ignore($user->id),
+            ],
         ];
     }
 }
