@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\GetAccessTokenRequest;
 use App\Support\Auth\RespondsWithToken;
-use Illuminate\Http\Request;
 
 class RequestAccessTokenController extends Controller
 {
@@ -13,10 +13,10 @@ class RequestAccessTokenController extends Controller
     /**
      * Creates new access token.
      *
-     * @param Request $request
+     * @param GetAccessTokenRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function __invoke(Request $request)
+    public function __invoke(GetAccessTokenRequest $request)
     {
         $credentials = $request->all(['email', 'password']);
 
