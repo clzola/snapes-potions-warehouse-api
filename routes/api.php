@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -18,3 +16,4 @@ Route::post("/users", "UsersController@store");
 Route::post('/profile', 'ProfilesController@update');
 Route::post('/profile/password', 'ProfilesController@updatePassword');
 Route::post('/profile/profile-picture', 'ProfilesController@updateProfilePicture');
+Route::delete('/profile/profile-picture', 'ProfilesController@destroyProfilePicture');

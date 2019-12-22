@@ -75,4 +75,22 @@ class ProfilesController extends Controller
             "profile_picture_url" => url("storage/users/profile_pictures/{$user->profile_picture}")
         ]);
     }
+
+
+    /**
+     * @return \Illuminate\Http\Response
+     */
+    public function destroyProfilePicture()
+    {
+        /** @var \App\User $user */
+        $user = auth('api')->user();
+
+        $oldProfilePictureFilename = $user->profile_picture;
+        $user->profile_picture = null;
+        $user->save();
+
+        \Storage::delete("public/users/profile_pictures/$oldProfilePictureFilename");
+
+        return response()->noContent();
+    }
 }
