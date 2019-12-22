@@ -16,3 +16,4 @@ use Illuminate\Http\Request;
 Route::post("/users", "UsersController@store");
 
 Route::post('/profile', 'ProfilesController@update');
+Route::post('/profile/password', 'ProfilesController@updatePassword');
