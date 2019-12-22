@@ -16,7 +16,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'Severus Snape',
             'email' => 'snape@slytherin.org',
             'email_verified_at' => now(),
-            'password' => bcrypt('secret'),
+            'password' => 'secret',
         ]);
     }
 }
