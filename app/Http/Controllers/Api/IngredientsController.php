@@ -34,6 +34,16 @@ class IngredientsController extends Controller
 
     /**
      * @param Ingredient $ingredient
+     * @return IngredientResource
+     */
+    public function show(Ingredient $ingredient)
+    {
+        return new IngredientResource($ingredient);
+    }
+
+
+    /**
+     * @param Ingredient $ingredient
      * @param UpdateIngredientRequest $request
      * @return IngredientResource
      */
