@@ -28,7 +28,6 @@ class UsersController extends Controller
 
         // Create user
         $data = $request->except("profile_picture");
-        $data['password'] = \Hash::make($data["password"]);
         $data["profile_picture"] = $profilePictureFileName;
         $user = new User($data);
 
