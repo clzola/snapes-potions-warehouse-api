@@ -81,4 +81,17 @@ class IngredientsController extends Controller
             "picture_url" => url("storage/ingredients/pictures/{$ingredient->picture}")
         ]);
     }
+
+
+    /**
+     * @param Ingredient $ingredient
+     * @return \Illuminate\Http\Response
+     * @throws \Exception
+     */
+    public function destroy(Ingredient $ingredient)
+    {
+        $ingredient->delete();
+
+        return response()->noContent();
+    }
 }

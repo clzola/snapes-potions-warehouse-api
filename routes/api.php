@@ -20,4 +20,6 @@ Route::delete('/profile/profile-picture', 'ProfilesController@destroyProfilePict
 
 Route::post('/ingredients', 'IngredientsController@store');
 Route::post('/ingredients/{ingredients}', 'IngredientsController@update');
+Route::get('/ingredients/{ingredients}', 'IngredientsController@show');
 Route::post('/ingredients/{ingredients}/picture', 'IngredientsController@updatePicture');
+Route::delete('/ingredients/{ingredients}', 'IngredientsController@destroy');
