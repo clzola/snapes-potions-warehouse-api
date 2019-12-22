@@ -2,8 +2,6 @@
 
 namespace App\Services;
 
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 use Intervention\Image\Constraint;
 use Intervention\Image\Facades\Image;
 
@@ -28,11 +26,7 @@ class StoreProfilePictureService
             $constraints->aspectRatio();
         });
 
-        $image->encode("jpg");
         $image->save();
-
-        if(!Str::endsWith($path, ["jpg", "jpeg"]))
-            Storage::delete($path);
 
         return $image->basename;
     }
