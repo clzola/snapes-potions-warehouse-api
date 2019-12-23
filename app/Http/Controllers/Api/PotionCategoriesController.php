@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreatePotionCategoryRequest;
+use App\Http\Requests\UpdatePotionCategoryRequest;
 use App\Http\Resources\PotionCategoryResource;
 use App\PotionCategory;
 use Illuminate\Http\Request;
@@ -39,6 +40,19 @@ class PotionCategoriesController extends Controller
      */
     public function show(PotionCategory $potionCategory)
     {
+        return new PotionCategoryResource($potionCategory);
+    }
+
+
+    /**
+     * @param PotionCategory $potionCategory
+     * @param UpdatePotionCategoryRequest $request
+     * @return PotionCategoryResource
+     */
+    public function update(PotionCategory $potionCategory, UpdatePotionCategoryRequest $request)
+    {
+        $potionCategory->fill($request->all())->save();
+
         return new PotionCategoryResource($potionCategory);
     }
 }
