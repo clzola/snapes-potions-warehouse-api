@@ -55,4 +55,17 @@ class PotionCategoriesController extends Controller
 
         return new PotionCategoryResource($potionCategory);
     }
+
+
+    /**
+     * @param PotionCategory $potionCategory
+     * @return \Illuminate\Http\Response
+     * @throws \Exception
+     */
+    public function destroy(PotionCategory $potionCategory)
+    {
+        $potionCategory->delete();
+
+        return response()->noContent();
+    }
 }
