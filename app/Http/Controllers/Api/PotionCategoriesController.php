@@ -14,7 +14,7 @@ class PotionCategoriesController extends Controller
     /**
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function listAll()
+    public function index()
     {
         return PotionCategoryResource::collection(
             PotionCategory::orderBy('name')->get()
