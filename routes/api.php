@@ -26,3 +26,4 @@ Route::delete('/ingredients/{ingredients}', 'IngredientsController@destroy');
 
 Route::get('/potion-categories', 'PotionCategoriesController@listAll');
 Route::post('/potion-categories', 'PotionCategoriesController@store');
+Route::get('/potion-categories/{potionCategories}', 'PotionCategoriesController@show');

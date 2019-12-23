@@ -31,4 +31,14 @@ class PotionCategoriesController extends Controller
             PotionCategory::create($request->all())
         );
     }
+
+
+    /**
+     * @param PotionCategory $potionCategory
+     * @return PotionCategoryResource
+     */
+    public function show(PotionCategory $potionCategory)
+    {
+        return new PotionCategoryResource($potionCategory);
+    }
 }
