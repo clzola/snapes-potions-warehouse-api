@@ -25,3 +25,4 @@ Route::post('/ingredients/{ingredients}/picture', 'IngredientsController@updateP
 Route::delete('/ingredients/{ingredients}', 'IngredientsController@destroy');
 
 Route::get('/potion-categories', 'PotionCategoriesController@listAll');
+Route::post('/potion-categories', 'PotionCategoriesController@store');
