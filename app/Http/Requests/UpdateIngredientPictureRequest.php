@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateIngredientPictureRequest extends FormRequest
 {
@@ -24,7 +25,7 @@ class UpdateIngredientPictureRequest extends FormRequest
     public function rules()
     {
         return [
-            "picture" => "mimes:jpeg,bmp,png",
+            "picture" => "required|mimes:jpeg,bmp,png",
             "picture_crop" => "array",
             "picture_crop.width" => "required_with:picture_crop|integer",
             "picture_crop.height" => "required_with:picture_crop|integer",

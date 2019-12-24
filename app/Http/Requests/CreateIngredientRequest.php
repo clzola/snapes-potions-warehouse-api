@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class CreateIngredientRequest extends FormRequest
 {
@@ -26,7 +27,7 @@ class CreateIngredientRequest extends FormRequest
         return [
             "name" => "required|string|max:250",
             "description" => "required|string",
-            "picture" => "mimes:jpeg,bmp,png",
+            "picture" => "required|mimes:jpeg,bmp,png",
             "picture_crop" => "array",
             "picture_crop.width" => "required_with:picture_crop|integer",
             "picture_crop.height" => "required_with:picture_crop|integer",
