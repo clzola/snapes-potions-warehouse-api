@@ -21,10 +21,10 @@ Route::delete('/profile/profile-picture', 'ProfilesController@destroyProfilePict
 Route::apiResource('/ingredients', 'IngredientsController')->except('index');
 
 Route::apiResource('/potion-categories', 'PotionCategoriesController')
-    ->parameters(['potion_category' => 'potionCategory']);
+    ->parameters(['potion-categories' => 'potionCategory']);
 
 Route::apiResource('/potion-difficulty-levels', 'PotionDifficultyLevelsController')
-    ->parameters(['potion_difficulty_level' => 'difficultyLevel']);
+    ->parameters(['potion-difficulty-levels' => 'difficultyLevel']);
 
 Route::apiResource('/potions', 'PotionsController')
     ->except(['index']);
