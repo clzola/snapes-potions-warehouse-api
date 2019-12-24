@@ -82,10 +82,16 @@ class PotionDifficultyLevelsController extends Controller
      * @param PotionDifficultyLevel $difficultyLevel
      * @return \Illuminate\Http\Response
      * @throws \Exception
+     * @throws \Throwable
      */
     public function destroy(PotionDifficultyLevel $difficultyLevel)
     {
-        $difficultyLevel->delete();
+        \DB::transaction(function() use ($difficultyLevel) {
+            $difficultyLevel->delete();
+
+            PotionDifficultyLevel::where('order', '>=', $difficultyLevel->order)
+                ->update(['order' => \DB::raw('`order` - 1')]);
+        });
 
         return response()->noContent();
     }
