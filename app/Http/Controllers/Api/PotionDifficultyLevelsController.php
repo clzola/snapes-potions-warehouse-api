@@ -32,7 +32,7 @@ class PotionDifficultyLevelsController extends Controller
 
     /**
      * @param CreatePotionDifficultyLevelRequest $request
-     * @return PotionDifficultyLevel
+     * @return PotionDifficultyLevelResource
      */
     public function store(CreatePotionDifficultyLevelRequest $request)
     {
@@ -40,7 +40,7 @@ class PotionDifficultyLevelsController extends Controller
         $difficultyLevel->order = intval(PotionDifficultyLevel::max('order') ?? 0) + 1;
         $difficultyLevel->save();
 
-        return new PotionDifficultyLevel($difficultyLevel);
+        return new PotionDifficultyLevelResource($difficultyLevel);
     }
 
 
