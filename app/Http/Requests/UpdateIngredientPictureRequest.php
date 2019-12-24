@@ -24,8 +24,17 @@ class UpdateIngredientPictureRequest extends FormRequest
      */
     public function rules()
     {
+        $pictureRules = [
+            'required',
+            'mimes:jpeg,bmp,png',
+        ];
+
+        if(!$this->has('picture_crop')) {
+            $pictureRules[] = Rule::dimensions()->ratio(1.0);
+        }
+
         return [
-            "picture" => "required|mimes:jpeg,bmp,png",
+            "picture" => $pictureRules,
             "picture_crop" => "array",
             "picture_crop.width" => "required_with:picture_crop|integer",
             "picture_crop.height" => "required_with:picture_crop|integer",
