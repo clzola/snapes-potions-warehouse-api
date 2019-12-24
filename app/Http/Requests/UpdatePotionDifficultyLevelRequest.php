@@ -24,8 +24,8 @@ class UpdatePotionDifficultyLevelRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:250',
-            'description' => 'required|string',
+            'name' => 'string|max:250',
+            'description' => 'string',
             'order' => 'integer|gte:1'
         ];
     }
