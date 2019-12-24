@@ -37,6 +37,16 @@ class PotionDifficultyLevelsController extends Controller
 
     /**
      * @param PotionDifficultyLevel $difficultyLevel
+     * @return PotionDifficultyLevelResource
+     */
+    public function show(PotionDifficultyLevel $difficultyLevel)
+    {
+        return new PotionDifficultyLevelResource($difficultyLevel);
+    }
+
+
+    /**
+     * @param PotionDifficultyLevel $difficultyLevel
      * @param UpdatePotionDifficultyLevelRequest $request
      * @return PotionDifficultyLevel
      */
