@@ -27,4 +27,16 @@ class PotionRecipesController extends Controller
 
         return new PotionRecipeResource($recipe);
     }
+
+
+    /**
+     * @param PotionRecipe $recipe
+     * @return PotionRecipeResource
+     */
+    public function show(PotionRecipe $recipe)
+    {
+        $recipe->load('ingredients');
+
+        return new PotionRecipeResource($recipe);
+    }
 }

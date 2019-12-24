@@ -30,3 +30,4 @@ Route::apiResource('/potions', 'PotionsController')
     ->except(['index']);
 
 Route::post('/potions/{potion}/recipe', 'PotionRecipesController@store');
+Route::get('/potions/{potion}/recipe', 'PotionRecipesController@show');
