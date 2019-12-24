@@ -27,7 +27,5 @@ Route::apiResource('/potion-categories', 'PotionCategoriesController')
 Route::apiResource('/potion-difficulty-levels', 'PotionDifficultyLevelsController')
     ->parameters(['potion_difficulty_level' => 'difficultyLevel']);
 
-Route::post('/potions', 'PotionsController@store');
-Route::get('/potions/{potion}', 'PotionsController@show');
-Route::put('/potions/{potion}', 'PotionsController@update');
-Route::delete('/potions/{potion}', 'PotionsController@destroy');
+Route::apiResource('/potions', 'PotionsController')
+    ->except(['index']);
