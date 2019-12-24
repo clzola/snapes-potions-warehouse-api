@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $description
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Potion[] $potions
+ * @property-read int|null $potions_count
  * @method static \Illuminate\Database\Eloquent\Builder|\App\PotionCategory newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\PotionCategory newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\PotionCategory query()
@@ -41,4 +43,12 @@ class PotionCategory extends Model
         "name",
         "description",
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function potions()
+    {
+        return $this->hasMany(Potion::class);
+    }
 }
