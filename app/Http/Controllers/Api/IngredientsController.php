@@ -72,7 +72,7 @@ class IngredientsController extends Controller
 
         \DB::transaction(function () use ($ingredient, $pictureFileName) {
             $oldPictureFilename = $ingredient->picture;
-            $ingredient->picture = $pictureFileName;
+            $ingredient->picture = basename($pictureFileName);
             $ingredient->save();
             \Storage::delete("public/ingredients/pictures/$oldPictureFilename");
         });
