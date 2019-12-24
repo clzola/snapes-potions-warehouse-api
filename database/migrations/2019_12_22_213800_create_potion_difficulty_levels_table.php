@@ -17,6 +17,7 @@ class CreatePotionDifficultyLevelsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->text('description');
+            $table->unsignedInteger('order');
             $table->timestamps();
         });
     }
