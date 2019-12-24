@@ -98,4 +98,12 @@ class Potion extends Model
     {
         return $this->belongsTo(PotionDifficultyLevel::class);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function potionRecipe()
+    {
+        return $this->hasOne(PotionRecipe::class);
+    }
 }
