@@ -11,14 +11,14 @@
 |
 */
 
-Route::post("/users", "UsersController@store");
+Route::post("/users", "UsersController@store")->name('users.store');
 
-Route::post('/profile', 'ProfilesController@update');
-Route::post('/profile/password', 'ProfilesController@updatePassword');
-Route::post('/profile/profile-picture', 'ProfilesController@updateProfilePicture');
-Route::delete('/profile/profile-picture', 'ProfilesController@destroyProfilePicture');
+Route::post('/profile', 'ProfilesController@update')->name('profile.get');
+Route::post('/profile/password', 'ProfilesController@updatePassword')->name('profile.update-password');
+Route::post('/profile/profile-picture', 'ProfilesController@updateProfilePicture')->name('profile.update-picture');
+Route::delete('/profile/profile-picture', 'ProfilesController@destroyProfilePicture')->name('profile.delete-picture');
 
-Route::post('/ingredients/{ingredient}/picture', 'IngredientsController@updatePicture');
+Route::post('/ingredients/{ingredient}/picture', 'IngredientsController@updatePicture')->name('ingredients.update-picture');
 Route::apiResource('/ingredients', 'IngredientsController')->except('index');
 
 Route::apiResource('/potion-categories', 'PotionCategoriesController')
