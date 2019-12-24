@@ -18,7 +18,6 @@ Route::post('/profile/password', 'ProfilesController@updatePassword')->name('pro
 Route::post('/profile/profile-picture', 'ProfilesController@updateProfilePicture')->name('profile.update-picture');
 Route::delete('/profile/profile-picture', 'ProfilesController@destroyProfilePicture')->name('profile.delete-picture');
 
-Route::post('/ingredients/{ingredient}/picture', 'IngredientsController@updatePicture')->name('ingredients.update-picture');
 Route::apiResource('/ingredients', 'IngredientsController')->except('index');
 
 Route::apiResource('/potion-categories', 'PotionCategoriesController')
