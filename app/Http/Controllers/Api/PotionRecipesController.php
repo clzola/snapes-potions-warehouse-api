@@ -8,7 +8,6 @@ use App\Http\Requests\UpdatePotionRecipeRequest;
 use App\Http\Resources\PotionRecipeResource;
 use App\Potion;
 use App\PotionRecipe;
-use Illuminate\Http\Request;
 
 class PotionRecipesController extends Controller
 {
@@ -40,7 +39,7 @@ class PotionRecipesController extends Controller
     public function show(Potion $potion)
     {
         $recipe = $potion->potionRecipe;
-        if(is_null($recipe))
+        if (is_null($recipe))
             abort(404);
 
         $recipe->load('ingredients');
@@ -56,13 +55,13 @@ class PotionRecipesController extends Controller
     public function update(Potion $potion, UpdatePotionRecipeRequest $request)
     {
         $recipe = $potion->potionRecipe;
-        if(is_null($recipe))
+        if (is_null($recipe))
             abort(400, 'Cannot update potion recipe because it does not exist');
 
         $recipe->fill($request->all());
         $recipe->save();
 
-        if($request->has('ingredients')) {
+        if ($request->has('ingredients')) {
             $ingredients = collect($request->get('ingredients'))
                 ->mapWithKeys(function (array $item) {
                     return [$item["id"] => ['amount' => $item['amount'], 'measurement_unit' => $item['measurement_unit']]];
