@@ -24,7 +24,6 @@ class CreatePotionRecipeRequest extends FormRequest
     public function rules()
     {
         return [
-            'potion_id' => 'required|integer|exists:potions,id',
             'instructions' => 'required|string',
             'ingredients' => 'required|array',
             'ingredients.*.id' => 'required|integer|exists:ingredients,id',
