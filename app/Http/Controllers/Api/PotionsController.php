@@ -55,32 +55,42 @@ class PotionsController extends Controller
      * @param UpdatePotionRequest $request
      * @param StorePotionPictureService $service
      * @return PotionResource
+     * @throws \Exception
+     * @throws \Throwable
      */
     public function update(Potion $potion, UpdatePotionRequest $request, StorePotionPictureService $service)
     {
         $potion->fill($request->all());
 
-        if ($request->has('picture')) {
-            $oldPictureFileName = $potion->picture;
+        $oldPictureFileName = $this->replacePotionPicture(
+            $potion,
+            $request->file('picture'),
+            $request->get('picture_crop'),
+            $service
+        );
 
-            $this->storePotionPicture(
-                $potion,
-                $request->file('picture'),
-                $request->get('picture_crop'),
-                $service
-            );
-        }
-
-        $potion->save();
-
-        try {
+        \DB::transaction(function () use ($potion, $oldPictureFileName) {
+            $potion->save();
             if (isset($oldPictureFileName))
                 \Storage::delete("public/potions/pictures/$oldPictureFileName");
-        } catch (\Exception $e) {}
+        });
 
         $potion->load(['potionCategory', 'potionDifficultyLevel']);
 
         return new PotionResource($potion);
+    }
+
+
+    /**
+     * @param Potion $potion
+     * @return \Illuminate\Http\Response
+     * @throws \Exception
+     */
+    public function destroy(Potion $potion)
+    {
+        $potion->delete();
+
+        return response()->noContent();
     }
 
 
@@ -103,13 +113,24 @@ class PotionsController extends Controller
 
     /**
      * @param Potion $potion
-     * @return \Illuminate\Http\Response
-     * @throws \Exception
+     * @param UploadedFile $uploadedFile
+     * @param array $cropParameters
+     * @param StorePotionPictureService $service
+     * @return null|string
      */
-    public function destroy(Potion $potion)
+    protected function replacePotionPicture(Potion $potion, UploadedFile $uploadedFile, array $cropParameters, StorePotionPictureService $service)
     {
-        $potion->delete();
+        if (is_null($uploadedFile))
+            return null;
 
-        return response()->noContent();
+        $oldPictureFileName = $potion->picture;
+        $this->storePotionPicture(
+            $potion,
+            $uploadedFile,
+            $cropParameters,
+            $service
+        );
+
+        return $oldPictureFileName;
     }
 }
