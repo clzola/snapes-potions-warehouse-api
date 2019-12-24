@@ -23,6 +23,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\PotionCategory $potionCategory
  * @property-read \App\PotionDifficultyLevel $potionDifficultyLevel
+ * @property-read \App\PotionRecipe $potionRecipe
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Potion newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Potion newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Potion query()
