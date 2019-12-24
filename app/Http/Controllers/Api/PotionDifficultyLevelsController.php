@@ -64,9 +64,11 @@ class PotionDifficultyLevelsController extends Controller
         $difficultyLevel->fill($request->all());
         $difficultyLevel->save();
 
-        PotionDifficultyLevel::where('order', '>=', $difficultyLevel->order)
-            ->where('id', '<>', $difficultyLevel->id)
-            ->update(['order' => \DB::raw('order + 1')]);
+        if($request->has('order')) {
+            PotionDifficultyLevel::where('order', '>=', $difficultyLevel->order)
+                ->where('id', '<>', $difficultyLevel->id)
+                ->update(['order' => \DB::raw('`order` + 1')]);
+        }
 
         return new PotionDifficultyLevel($difficultyLevel);
     }
