@@ -40,6 +40,18 @@ class PotionsController extends Controller
 
     /**
      * @param Potion $potion
+     * @return PotionResource
+     */
+    public function show(Potion $potion)
+    {
+        $potion->load(['potionCategory', 'potionDifficultyLevel']);
+
+        return new PotionResource($potion);
+    }
+
+
+    /**
+     * @param Potion $potion
      * @param UpdatePotionRequest $request
      * @param StorePotionPictureService $service
      * @return PotionResource

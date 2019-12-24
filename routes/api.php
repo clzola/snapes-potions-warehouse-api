@@ -28,4 +28,5 @@ Route::apiResource('/potion-difficulty-levels', 'PotionDifficultyLevelsControlle
     ->parameters(['potion_difficulty_level' => 'difficultyLevel']);
 
 Route::post('/potions', 'PotionsController@store');
+Route::get('/potions/{potion}', 'PotionsController@show');
 Route::put('/potions/{potion}', 'PotionsController@update');
