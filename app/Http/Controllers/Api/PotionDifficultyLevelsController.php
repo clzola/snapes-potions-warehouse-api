@@ -61,4 +61,17 @@ class PotionDifficultyLevelsController extends Controller
 
         return new PotionDifficultyLevel($difficultyLevel);
     }
+
+
+    /**
+     * @param PotionDifficultyLevel $difficultyLevel
+     * @return \Illuminate\Http\Response
+     * @throws \Exception
+     */
+    public function destroy(PotionDifficultyLevel $difficultyLevel)
+    {
+        $difficultyLevel->delete();
+
+        return response()->noContent();
+    }
 }
