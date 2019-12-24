@@ -97,7 +97,7 @@ class PotionsController extends Controller
             $cropParameters
         );
 
-        $potion->picture = $pictureFileName;
+        $potion->picture = basename($pictureFileName);
     }
 
 
