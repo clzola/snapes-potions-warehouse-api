@@ -14,6 +14,15 @@ use Illuminate\Http\UploadedFile;
 class IngredientsController extends Controller
 {
     /**
+     * IngredientsController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
+
+    /**
      * @param CreateIngredientRequest $request
      * @param StoreIngredientPictureService $service
      * @return IngredientResource

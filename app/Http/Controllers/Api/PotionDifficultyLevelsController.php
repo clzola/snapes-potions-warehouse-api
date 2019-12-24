@@ -11,6 +11,15 @@ use App\PotionDifficultyLevel;
 class PotionDifficultyLevelsController extends Controller
 {
     /**
+     * PotionDifficultyLevelsController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
+
+    /**
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index()

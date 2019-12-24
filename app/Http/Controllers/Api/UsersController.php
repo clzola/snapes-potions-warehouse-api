@@ -11,6 +11,15 @@ use App\User;
 class UsersController extends Controller
 {
     /**
+     * UsersController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
+
+    /**
      * @param CreateUserRequest $request
      * @param StoreProfilePictureService $service
      * @return \Illuminate\Http\JsonResponse|UserResource

@@ -12,6 +12,15 @@ use App\Services\StoreProfilePictureService;
 class ProfilesController extends Controller
 {
     /**
+     * ProfilesController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
+
+    /**
      * @param UpdateProfileRequest $request
      * @return ProfileResource|\Illuminate\Http\JsonResponse
      */

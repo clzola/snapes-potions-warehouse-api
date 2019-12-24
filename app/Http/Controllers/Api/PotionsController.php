@@ -14,6 +14,15 @@ use Illuminate\Http\UploadedFile;
 class PotionsController extends Controller
 {
     /**
+     * PotionsController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
+
+    /**
      * @param CreatePotionRequest $request
      * @param StorePotionPictureService $service
      * @return PotionResource

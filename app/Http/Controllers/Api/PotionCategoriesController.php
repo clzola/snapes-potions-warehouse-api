@@ -12,6 +12,15 @@ use Illuminate\Http\Request;
 class PotionCategoriesController extends Controller
 {
     /**
+     * PotionCategoriesController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
+
+    /**
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index()

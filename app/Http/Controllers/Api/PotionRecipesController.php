@@ -12,6 +12,15 @@ use App\PotionRecipe;
 class PotionRecipesController extends Controller
 {
     /**
+     * PotionRecipesController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
+
+    /**
      * @param Potion $potion
      * @param CreatePotionRecipeRequest $request
      * @return PotionRecipeResource
