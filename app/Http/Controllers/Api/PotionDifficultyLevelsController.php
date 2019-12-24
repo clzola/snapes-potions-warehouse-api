@@ -57,7 +57,7 @@ class PotionDifficultyLevelsController extends Controller
     /**
      * @param PotionDifficultyLevel $difficultyLevel
      * @param UpdatePotionDifficultyLevelRequest $request
-     * @return PotionDifficultyLevel
+     * @return PotionDifficultyLevelResource
      * @throws \Exception
      * @throws \Throwable
      */
@@ -74,7 +74,7 @@ class PotionDifficultyLevelsController extends Controller
             }
         });
 
-        return new PotionDifficultyLevel($difficultyLevel);
+        return new PotionDifficultyLevelResource($difficultyLevel);
     }
 
 
