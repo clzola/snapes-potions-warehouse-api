@@ -25,3 +25,5 @@ Route::apiResource('/potion-categories', 'PotionCategoriesController')
     ->parameters(['potion_category' => 'potionCategory']);
 
 Route::get('/potion-difficulty-level', 'PotionDifficultyLevelsController@index');
+Route::post('/potion-difficulty-level', 'PotionDifficultyLevelsController@store');
+Route::put('/potion-difficulty-level/{difficultyLevel}', 'PotionDifficultyLevelsController@update');
