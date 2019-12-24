@@ -30,3 +30,4 @@ Route::apiResource('/potion-difficulty-levels', 'PotionDifficultyLevelsControlle
 Route::post('/potions', 'PotionsController@store');
 Route::get('/potions/{potion}', 'PotionsController@show');
 Route::put('/potions/{potion}', 'PotionsController@update');
+Route::delete('/potions/{potion}', 'PotionsController@destroy');

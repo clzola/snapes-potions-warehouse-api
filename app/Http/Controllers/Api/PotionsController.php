@@ -99,4 +99,17 @@ class PotionsController extends Controller
 
         $potion->picture = $pictureFileName;
     }
+
+
+    /**
+     * @param Potion $potion
+     * @return \Illuminate\Http\Response
+     * @throws \Exception
+     */
+    public function destroy(Potion $potion)
+    {
+        $potion->delete();
+
+        return response()->noContent();
+    }
 }
