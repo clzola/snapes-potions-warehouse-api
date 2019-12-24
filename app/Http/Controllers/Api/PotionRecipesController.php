@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreatePotionRecipeRequest;
+use App\Http\Requests\UpdatePotionRecipeRequest;
 use App\Http\Resources\PotionRecipeResource;
 use App\Potion;
 use App\PotionRecipe;
@@ -45,5 +46,29 @@ class PotionRecipesController extends Controller
         $recipe->load('ingredients');
 
         return new PotionRecipeResource($recipe);
+    }
+
+
+    /**
+     * @param Potion $potion
+     * @param UpdatePotionRecipeRequest $request
+     */
+    public function update(Potion $potion, UpdatePotionRecipeRequest $request)
+    {
+        $recipe = $potion->potionRecipe;
+        if(is_null($recipe))
+            abort(400, 'Cannot update potion recipe because it does not exist');
+
+        $recipe->fill($request->all());
+        $recipe->save();
+
+        if($request->has('ingredients')) {
+            $ingredients = collect($request->get('ingredients'))
+                ->mapWithKeys(function (array $item) {
+                    return [$item["id"] => ['amount' => $item['amount'], 'measurement_unit' => $item['measurement_unit']]];
+                });
+
+            $recipe->ingredients()->sync($ingredients);
+        }
     }
 }

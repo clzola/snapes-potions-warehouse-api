@@ -31,3 +31,4 @@ Route::apiResource('/potions', 'PotionsController')
 
 Route::post('/potions/{potion}/recipe', 'PotionRecipesController@store');
 Route::get('/potions/{potion}/recipe', 'PotionRecipesController@show');
+Route::put('/potions/{potion}/recipe', 'PotionRecipesController@update');

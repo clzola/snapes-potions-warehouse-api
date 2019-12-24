@@ -40,7 +40,6 @@ class PotionRecipe extends Model
      * @var array
      */
     protected $fillable = [
-        'potion_id',
         'instructions',
     ];
 
