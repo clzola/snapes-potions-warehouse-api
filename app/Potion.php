@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $potion_difficulty_level_id
  * @property string $description
  * @property string $picture
+ * @property string $picture_url
  * @property int $bottles
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -83,6 +84,14 @@ class Potion extends Model
         'potion_difficulty_level_id' => 'integer',
         'bottles' => 'integer',
     ];
+
+    /**
+     * @return \Illuminate\Contracts\Routing\UrlGenerator|string
+     */
+    public function getPictureUrlAttribute()
+    {
+        return url("storage/ingredients/pictures/{$this->picture}");
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

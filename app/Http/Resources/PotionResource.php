@@ -31,7 +31,7 @@ class PotionResource extends JsonResource
             'brewing_time' => $this->brewing_time,
             'potion_difficulty_level_id' => $this->potion_difficulty_level_id,
             'description' => $this->description,
-            'picture' => $this->picture,
+            'picture_url' => $this->picture_url,
             'bottles' => $this->bottles,
             'created_at' => optional($this->created_at)->format('Y-m-d H:i:s'),
             'updated_at' => optional($this->updated_at)->format('Y-m-d H:i:s'),
