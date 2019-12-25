@@ -36,9 +36,7 @@ class PotionResource extends JsonResource
             'created_at' => optional($this->created_at)->format('Y-m-d H:i:s'),
             'updated_at' => optional($this->updated_at)->format('Y-m-d H:i:s'),
             'potion_category' => new PotionCategoryResource($this->whenLoaded('potionCategory')),
-            'potion_difficulty_level' => $this->whenLoaded('potionDifficultyLevel', function() {
-                return $this->potionDifficultyLevel->only(['id', 'name']);
-            }),
+            'potion_difficulty_level' => new PotionDifficultyLevelSimpleResource($this->whenLoaded('potionDifficultyLevel')),
         ];
     }
 }
