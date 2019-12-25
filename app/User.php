@@ -16,6 +16,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @property \Illuminate\Support\Carbon|null $email_verified_at
  * @property string $password
  * @property string|null $profile_picture
+ * @property string|null $profile_picture_url
  * @property string|null $remember_token
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -77,6 +78,17 @@ class User extends Authenticatable implements JWTSubject
     public function setPasswordAttribute($password)
     {
         $this->attributes["password"] = \Hash::make($password);
+    }
+
+    /**
+     * @return \Illuminate\Contracts\Routing\UrlGenerator|null|string
+     */
+    public function getProfilePictureUrlAttribute()
+    {
+        if(is_null($this->profile_picture))
+            return null;
+
+        return url("storage/users/pictures/{$this->profile_picture}");
     }
 
     /**
