@@ -23,6 +23,19 @@ class PotionsController extends Controller
 
 
     /**
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     */
+    public function index()
+    {
+        return PotionResource::collection(
+            Potion::with(['potionCategory', 'potionDifficultyLevel'])
+                ->orderBy('name')
+                ->paginate()
+        );
+    }
+
+
+    /**
      * @param CreatePotionRequest $request
      * @param StorePotionPictureService $service
      * @return PotionResource

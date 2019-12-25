@@ -26,8 +26,7 @@ Route::apiResource('/potion-categories', 'PotionCategoriesController')
 Route::apiResource('/potion-difficulty-levels', 'PotionDifficultyLevelsController')
     ->parameters(['potion-difficulty-levels' => 'difficultyLevel']);
 
-Route::apiResource('/potions', 'PotionsController')
-    ->except(['index']);
+Route::apiResource('/potions', 'PotionsController');
 
 Route::post('/potions/{potion}/recipe', 'PotionRecipesController@store');
 Route::get('/potions/{potion}/recipe', 'PotionRecipesController@show');
