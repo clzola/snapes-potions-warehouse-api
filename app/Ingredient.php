@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $name
  * @property string $description
  * @property string $picture
+ * @property string $picture_url
  * @property int $amount
  * @property string $measurement_unit
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -59,4 +60,12 @@ class Ingredient extends Model
     protected $casts = [
         'amount' => 'integer',
     ];
+
+    /**
+     * @return \Illuminate\Contracts\Routing\UrlGenerator|string
+     */
+    public function getPictureUrlAttribute()
+    {
+        return url("storage/ingredients/pictures/{$this->picture}");
+    }
 }

@@ -24,7 +24,7 @@ class IngredientResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
-            'picture' => $this->picture,
+            'picture_url' => $this->picture_url,
             'amount' => $this->amount,
             'measurement_unit' => $this->measurement_unit,
             'created_at' => optional($this->created_at)->format('Y-m-d H:i:s'),
