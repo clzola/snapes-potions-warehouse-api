@@ -33,6 +33,17 @@ class SearchPotionsController extends Controller
             ->when($request->get('potion_difficulty_level_id'), function (Builder $builder, $potionDifficultyLevelId) {
                 $builder->where('potion_difficulty_level_id', $potionDifficultyLevelId);
             })
+            ->when($request->get('brewing_time'), function(Builder $builder, $brewingTime) {
+                if(isset($brewingTime['min']) && !isset($brewingTime['max']))
+                    $builder->where('brewing_time', '>=', $brewingTime['min']);
+                else if(isset($brewingTime['max']) && !isset($brewingTime['min']))
+                    $builder->where('brewing_time', '<=', $brewingTime['max']);
+                else {
+                    if($brewingTime['min'] === $brewingTime['max'])
+                        $builder->where('brewing_time', $brewingTime['min']);
+                    else $builder->whereBetween('brewing_time', [$brewingTime['min'], $brewingTime['max']]);
+                }
+            })
             ->when($request->get('sort'), function(Builder $builder, $sort) use ($request) {
                 foreach ($sort as $sortBy)
                     $builder->orderBy($sortBy['column'], $sortBy['direction']);

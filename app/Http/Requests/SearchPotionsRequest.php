@@ -28,6 +28,9 @@ class SearchPotionsRequest extends FormRequest
             'search_term' => 'string',
             'potion_category_id' => 'integer',
             'potion_difficulty_level_id' => 'integer',
+            'brewing_time' => 'array',
+            'brewing_time.min' => 'required_with:brewing_time|required_without:brewing_time.max|integer',
+            'brewing_time.max' => 'required_with:brewing_time|required_without:brewing_time.min|integer',
             'sort' => 'array',
             'sort.*.column' => [
                 'required_with:sort',

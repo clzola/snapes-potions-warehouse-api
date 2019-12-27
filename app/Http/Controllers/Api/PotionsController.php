@@ -8,7 +8,6 @@ use App\Http\Requests\UpdatePotionRequest;
 use App\Http\Resources\PotionResource;
 use App\Potion;
 use App\Services\StorePotionPictureService;
-use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 
 class PotionsController extends Controller

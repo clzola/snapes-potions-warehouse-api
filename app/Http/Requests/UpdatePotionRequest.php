@@ -33,7 +33,7 @@ class UpdatePotionRequest extends FormRequest
             'characteristics.*' => 'string|max:250',
             'side_effects' => 'array',
             'side_effects.*' => 'string|max:250',
-            'brewing_time' => 'string|max:250',
+            'brewing_time' => 'integer',
             'potion_difficulty_level_id' => 'integer|exists:potion_difficulty_levels',
             'description' => 'string',
             "picture" => "mimes:jpeg,bmp,png",

@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $effect
  * @property array $characteristics
  * @property array|null $side_effects
- * @property string $brewing_time
+ * @property int $brewing_time
  * @property int $potion_difficulty_level_id
  * @property string $description
  * @property string $picture
@@ -81,6 +81,7 @@ class Potion extends Model
         'potion_category_id' => 'integer',
         'characteristics' => 'array',
         'side_effects' => 'array',
+        'brewing_time' => 'integer',
         'potion_difficulty_level_id' => 'integer',
         'bottles' => 'integer',
     ];

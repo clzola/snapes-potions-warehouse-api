@@ -21,7 +21,7 @@ class CreatePotionsTable extends Migration
             $table->string('effect');
             $table->json('characteristics');
             $table->json('side_effects')->nullable();
-            $table->string('brewing_time');
+            $table->unsignedInteger('brewing_time');
             $table->unsignedInteger('potion_difficulty_level_id');
             $table->text('description');
             $table->string('picture');
