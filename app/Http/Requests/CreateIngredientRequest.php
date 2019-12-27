@@ -43,7 +43,7 @@ class CreateIngredientRequest extends FormRequest
             "picture_crop.x" => "required_with:picture_crop|integer",
             "picture_crop.y" => "required_with:picture_crop|integer",
             "amount" => "required|integer|gt:0",
-            "measurement_unit" => "required|string|in:g,ml"
+            "measurement_unit" => "required|string|in:g,ml,quantity"
         ];
     }
 }

@@ -36,7 +36,7 @@ class UpdateIngredientRequest extends FormRequest
             "name" => "string|max:250",
             "description" => "string",
             "amount" => "integer|gt:0",
-            "measurement_unit" => "string|in:g,ml",
+            "measurement_unit" => "string|in:g,ml,quantity",
             "picture" => $pictureRules,
             "picture_crop" => "array",
             "picture_crop.width" => "required_with:picture_crop|integer",

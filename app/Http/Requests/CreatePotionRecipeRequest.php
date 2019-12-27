@@ -28,7 +28,7 @@ class CreatePotionRecipeRequest extends FormRequest
             'ingredients' => 'required|array',
             'ingredients.*.id' => 'required|integer|exists:ingredients,id',
             'ingredients.*.amount' => 'required|integer|gt:0',
-            'ingredients.*.measurement_unit' => 'required|in:g,ml',
+            'ingredients.*.measurement_unit' => 'required|in:g,ml,quantity',
         ];
     }
 }
