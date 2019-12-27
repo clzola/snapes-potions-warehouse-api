@@ -15,6 +15,14 @@ use Illuminate\Database\Eloquent\Builder;
 class SearchPotionsController extends Controller
 {
     /**
+     * SearchPotionsController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
+    /**
      * @param SearchPotionsRequest $request
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
