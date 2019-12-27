@@ -41,9 +41,29 @@ class SearchPotionsRequest extends FormRequest
                     'updated_at',
                 ])
             ],
-            'sort.*.adc' => 'boolean',
+            'sort.*.direction' => 'string|in:asc,desc',
             'page' => 'integer',
             'per_page' => 'integer',
         ];
+    }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        $input = $this->all();
+
+        if(isset($input['sort'])) {
+            foreach ($input['sort'] as &$sort) {
+                if(isset($sort['direction']))
+                    $sort['direction'] = strtolower($sort['direction']);
+                else $sort['direction'] = 'asc';
+            }
+        }
+
+        $this->replace($input);
     }
 }

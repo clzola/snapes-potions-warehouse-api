@@ -34,9 +34,8 @@ class SearchPotionsController extends Controller
                 $builder->where('potion_difficulty_level_id', $potionDifficultyLevelId);
             })
             ->when($request->get('sort'), function(Builder $builder, $sort) use ($request) {
-                foreach ($sort as $sortBy) {
-                    $builder->orderBy($sortBy['column'], (isset($sortBy['asc']) && boolval($sortBy['asc'])) ? 'asc' : 'desc');
-                }
+                foreach ($sort as $sortBy)
+                    $builder->orderBy($sortBy['column'], $sortBy['direction']);
             })
             ->paginate($request->get('per_page'));
 
