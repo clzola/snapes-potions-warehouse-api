@@ -18,7 +18,7 @@ Route::post('/profile/password', 'ProfilesController@updatePassword')->name('pro
 Route::post('/profile/profile-picture', 'ProfilesController@updateProfilePicture')->name('profile.update-picture');
 Route::delete('/profile/profile-picture', 'ProfilesController@destroyProfilePicture')->name('profile.delete-picture');
 
-Route::get('/ingredients/search', 'SearchIngredientsController');
+Route::get('/ingredients/search', 'SearchIngredientsController')->name('ingredients.search');
 Route::apiResource('/ingredients', 'IngredientsController')->except('index');
 
 Route::apiResource('/potion-categories', 'PotionCategoriesController')
@@ -27,9 +27,9 @@ Route::apiResource('/potion-categories', 'PotionCategoriesController')
 Route::apiResource('/potion-difficulty-levels', 'PotionDifficultyLevelsController')
     ->parameters(['potion-difficulty-levels' => 'difficultyLevel']);
 
-Route::get('/potions/search', 'SearchPotionsController');
+Route::get('/potions/search', 'SearchPotionsController')->name('potions.search');
 Route::apiResource('/potions', 'PotionsController');
 
-Route::post('/potions/{potion}/recipe', 'PotionRecipesController@store');
-Route::get('/potions/{potion}/recipe', 'PotionRecipesController@show');
-Route::put('/potions/{potion}/recipe', 'PotionRecipesController@update');
+Route::get('/potions/{potion}/recipe', 'PotionRecipesController@show')->name('potions.recipe.show');
+Route::post('/potions/{potion}/recipe', 'PotionRecipesController@store')->name('potions.recipe.store');
+Route::put('/potions/{potion}/recipe', 'PotionRecipesController@update')->name('potions.recipe.update');
