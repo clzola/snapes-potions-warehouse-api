@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\AddIngredientsRequest;
+use App\Http\Requests\AddIngredientsRequest;
 use App\Ingredient;
 
 class AddIngredientsController extends Controller
