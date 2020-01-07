@@ -27,7 +27,7 @@ class PotionRecipeResource extends JsonResource
             'instructions' => $this->instructions,
             'created_at' => optional($this->created_at)->format('Y-m-d H:i:s'),
             'updated_at' => optional($this->updated_at)->format('Y-m-d H:i:s'),
-            'potion' => new PotionRecipe($this->whenLoaded('potion')),
+            'potion' => new PotionRecipeResource($this->whenLoaded('potion')),
             'ingredients' => IngredientResource::collection($this->whenLoaded('ingredients')),
         ];
     }
