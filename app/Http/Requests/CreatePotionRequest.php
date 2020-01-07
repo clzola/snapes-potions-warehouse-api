@@ -43,6 +43,12 @@ class CreatePotionRequest extends FormRequest
             "picture_crop.x" => "required_with:picture_crop|integer",
             "picture_crop.y" => "required_with:picture_crop|integer",
             'bottles' => 'integer|gte:0',
+            "recipe" => "recipe|array",
+            "recipe.instructions" => "required|strings",
+            "recipe.ingredients" => "required|array",
+            "recipe.ingredients.*.id" => "required|integer|exists:ingredients,id",
+            "recipe.ingredients.*.amount" => "required|integer|gt:0",
+            "recipe.ingredients.*.measurement_unit" => "required|in:g,ml"
         ];
     }
 }

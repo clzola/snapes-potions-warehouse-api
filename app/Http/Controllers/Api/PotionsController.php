@@ -7,6 +7,7 @@ use App\Http\Requests\CreatePotionRequest;
 use App\Http\Requests\UpdatePotionRequest;
 use App\Http\Resources\PotionResource;
 use App\Potion;
+use App\PotionRecipe;
 use App\Services\StorePotionPictureService;
 use Illuminate\Http\UploadedFile;
 
@@ -37,25 +38,41 @@ class PotionsController extends Controller
     /**
      * @param CreatePotionRequest $request
      * @param StorePotionPictureService $service
-     * @return PotionResource
+     * @return mixed
+     * @throws \Exception
+     * @throws \Throwable
      */
     public function store(CreatePotionRequest $request, StorePotionPictureService $service)
     {
-        $potion = new Potion($request->all());
-        $potion->bottles = $request->get('bottles', 0);
+        return \DB::transaction(function () use ($request, $service) {
+            $potion = new Potion($request->all());
+            $potion->bottles = $request->get('bottles', 0);
 
-        $this->storePotionPicture(
-            $potion,
-            $request->file('picture'),
-            $request->get('picture_crop'),
-            $service
-        );
+            $this->storePotionPicture(
+                $potion,
+                $request->file('picture'),
+                $request->get('picture_crop'),
+                $service
+            );
 
-        $potion->save();
+            $potion->save();
 
-        $potion->load(['potionCategory', 'potionDifficultyLevel']);
+            $recipeInput = $request->get('recipe');
+            $recipe = new PotionRecipe($recipeInput);
+            $recipe->potion()->associate($potion);
+            $recipe->save();
 
-        return new PotionResource($potion);
+            $ingredients = collect($recipeInput['ingredients'])
+                ->mapWithKeys(function (array $item) {
+                    return [$item["id"] => ['amount' => $item['amount'], 'measurement_unit' => $item['measurement_unit']]];
+                });
+
+            $recipe->ingredients()->attach($ingredients);
+
+            $potion->load(['potionCategory', 'potionDifficultyLevel', 'potionRecipe.ingredients']);
+
+            return new PotionResource($potion);
+        });
     }
 
 
@@ -121,7 +138,7 @@ class PotionsController extends Controller
      * @param array $cropParameters
      * @param StorePotionPictureService $service
      */
-    protected function storePotionPicture(Potion $potion, UploadedFile $uploadedFile, array $cropParameters, StorePotionPictureService $service)
+    protected function storePotionPicture(Potion $potion, UploadedFile $uploadedFile, $cropParameters, StorePotionPictureService $service)
     {
         $pictureFileName = $service->store(
             $uploadedFile,
