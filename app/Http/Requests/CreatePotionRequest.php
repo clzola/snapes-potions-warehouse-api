@@ -34,7 +34,7 @@ class CreatePotionRequest extends FormRequest
             'side_effects' => 'array',
             'side_effects.*' => 'string|max:250',
             'brewing_time' => 'integer',
-            'potion_difficulty_level_id' => 'required|integer|exists:potion_difficulty_levels',
+            'potion_difficulty_level_id' => 'required|integer|exists:potion_difficulty_levels,id',
             'description' => 'required|string',
             "picture" => "required|mimes:jpeg,bmp,png",
             "picture_crop" => "array",
