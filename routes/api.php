@@ -13,7 +13,7 @@
 
 Route::post("/users", "UsersController@store")->name('users.store');
 
-Route::post('/profile', 'ProfilesController@update')->name('profile.get');
+Route::post('/profile', 'ProfilesController@update')->name('profile.update');
 Route::post('/profile/password', 'ProfilesController@updatePassword')->name('profile.update-password');
 Route::post('/profile/profile-picture', 'ProfilesController@updateProfilePicture')->name('profile.update-picture');
 Route::delete('/profile/profile-picture', 'ProfilesController@destroyProfilePicture')->name('profile.delete-picture');
