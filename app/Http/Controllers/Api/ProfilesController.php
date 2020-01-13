@@ -21,6 +21,18 @@ class ProfilesController extends Controller
 
 
     /**
+     * @return ProfileResource
+     */
+    public function show()
+    {
+        /** @var \App\User $user */
+        $user = auth('api')->user();
+
+        return new ProfileResource($user);
+    }
+
+
+    /**
      * @param UpdateProfileRequest $request
      * @return ProfileResource|\Illuminate\Http\JsonResponse
      */
