@@ -64,13 +64,23 @@ class PotionDifficultyLevelsController extends Controller
     public function update(PotionDifficultyLevel $difficultyLevel, UpdatePotionDifficultyLevelRequest $request)
     {
         \DB::transaction(function() use ($difficultyLevel, $request) {
+            $oldOrder = $difficultyLevel->order;
+
             $difficultyLevel->fill($request->all());
             $difficultyLevel->save();
 
             if($request->has('order')) {
-                PotionDifficultyLevel::where('order', '>=', $difficultyLevel->order)
-                    ->where('id', '<>', $difficultyLevel->id)
-                    ->update(['order' => \DB::raw('`order` + 1')]);
+                $orderRange = [$difficultyLevel->order, $oldOrder];
+                $orderUpdateStatement = '`order` + 1';
+                if($oldOrder < $difficultyLevel->order) {
+                    $orderRange = [$oldOrder, $difficultyLevel->order];
+                    $orderUpdateStatement = '`order` - 1';
+                }
+
+            PotionDifficultyLevel::whereBetween('order', $orderRange)
+                ->where('id', '<>', $difficultyLevel->id)
+                ->update(['order' => \DB::raw($orderUpdateStatement)]);
+
             }
         });
 
