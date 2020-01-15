@@ -65,8 +65,13 @@ class PotionDifficultyLevelsController extends Controller
     {
         \DB::transaction(function() use ($difficultyLevel, $request) {
             $oldOrder = $difficultyLevel->order;
-
             $difficultyLevel->fill($request->all());
+
+            $difficultyLevel->order = min(
+                $difficultyLevel->order,
+                intval(PotionDifficultyLevel::query()->max('order'))
+            );
+
             $difficultyLevel->save();
 
             if($request->has('order')) {
