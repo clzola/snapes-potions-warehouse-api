@@ -13,25 +13,31 @@ class PotionDifficultyLevelsTableSeeder extends Seeder
     {
         \App\PotionDifficultyLevel::create([
             "name" => "Novice",
-            "description" => "Lorem description",
+            "description" => "Unskilled, Not knowing, New to",
             "order" => 1
         ]);
 
         \App\PotionDifficultyLevel::create([
             "name" => "Beginner",
-            "description" => "Lorem description",
+            "description" => "Learning",
             "order" => 2
         ]);
 
         \App\PotionDifficultyLevel::create([
             "name" => "Intermediate",
-            "description" => "Lorem description",
+            "description" => "Knows adequately, Qualified",
             "order" => 3
         ]);
 
         \App\PotionDifficultyLevel::create([
             "name" => "Advanced",
-            "description" => "Lorem description",
+            "description" => "Practiced, Skillful",
+            "order" => 4
+        ]);
+
+        \App\PotionDifficultyLevel::create([
+            "name" => "Expert",
+            "description" => "Well practiced, Having versatile knowledge",
             "order" => 4
         ]);
     }

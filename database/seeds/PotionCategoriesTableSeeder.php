@@ -11,11 +11,6 @@ class PotionCategoriesTableSeeder extends Seeder
      */
     public function run()
     {
-        for($i = 0; $i < 5; $i++) {
-            \App\PotionCategory::create([
-                "name" => "Potion Category $i",
-                "description" => "Lorem ipsum description",
-            ]);
-        }
+        factory(\App\PotionCategory::class, 5)->create();
     }
 }
