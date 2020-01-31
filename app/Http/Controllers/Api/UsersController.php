@@ -20,6 +20,15 @@ class UsersController extends Controller
 
 
     /**
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     */
+    public function index()
+    {
+        return UserResource::collection(User::all());
+    }
+
+
+    /**
      * @param CreateUserRequest $request
      * @param StoreProfilePictureService $service
      * @return \Illuminate\Http\JsonResponse|UserResource
