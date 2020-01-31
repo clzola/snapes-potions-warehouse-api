@@ -10,14 +10,6 @@ class RefreshAccessTokenController extends Controller
     use RespondsWithToken;
 
     /**
-     * LogoutController constructor.
-     */
-    public function __construct()
-    {
-        $this->middleware('auth:api');
-    }
-
-    /**
      * Refreshes user's access token.
      *
      * @return \Illuminate\Http\JsonResponse
