@@ -26,26 +26,28 @@ class UsersController extends Controller
      */
     public function store(CreateUserRequest $request, StoreProfilePictureService $service)
     {
-        // Save profile picture if sent
-        $profilePictureFileName = null;
-        if ($request->hasFile('profile_picture')) {
-            $profilePictureFileName = $service->store(
-                $request->file("profile_picture"),
-                $request->get('profile_picture_crop', null)
-            );
-        }
+        // Prepare attributes
+        $attributes = $request->except("profile_picture");
+        $attributes["profile_picture"] = $this->storeProfilePicture($request, $service);
 
-        // Create user
-        $data = $request->except("profile_picture");
-        $data["profile_picture"] = $profilePictureFileName;
-        $user = new User($data);
-
-        // Save user
-        $user->save();
+        // Create & save user
+        $user = User::create($attributes);
 
         // Respond with user
         return (new UserResource($user))
             ->response()
             ->setStatusCode(201);
+    }
+
+
+    private function storeProfilePicture(CreateUserRequest $request, StoreProfilePictureService $service)
+    {
+        if (!$request->hasFile('profile_picture'))
+            return null;
+
+        return $service->store(
+            $request->file("profile_picture"),
+            $request->get('profile_picture_crop', null)
+        );
     }
 }
