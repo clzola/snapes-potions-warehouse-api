@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/users', 'Api\UsersController@index')->name('users.index');
+Route::get('/users', 'UsersController@index')->name('users.index');
 Route::post('/users', 'UsersController@store')->name('users.store');
 
 Route::get('/profile', 'ProfilesController@show')->name('profile.get');
