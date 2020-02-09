@@ -39,6 +39,7 @@ class PotionRecipeIngredient extends Pivot
         'ingredient_id',
         'amount',
         'measurement_unit',
+        'named_amount_id',
     ];
 
     /**
@@ -50,6 +51,7 @@ class PotionRecipeIngredient extends Pivot
         'potion_recipe_id' => 'integer',
         'potion_ingredient_id' => 'integer',
         'amount' => 'integer',
+        'named_amount_id' => 'integer',
     ];
 
     /**
@@ -58,4 +60,13 @@ class PotionRecipeIngredient extends Pivot
      * @var bool
      */
     public $timestamps = false;
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function namedAmount()
+    {
+        return $this->belongsTo(NamedAmount::class, 'named_amount_id');
+    }
 }

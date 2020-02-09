@@ -67,6 +67,14 @@ class PotionRecipe extends Model
     {
         return $this->belongsToMany(Ingredient::class, 'potion_recipe_ingredient')
             ->using(PotionRecipeIngredient::class)
-            ->withPivot(['amount', 'measurement_unit']);
+            ->withPivot(['amount', 'measurement_unit', 'named_amount_id']);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function equipment()
+    {
+        return $this->belongsToMany(Equipment::class, 'equipments');
     }
 }

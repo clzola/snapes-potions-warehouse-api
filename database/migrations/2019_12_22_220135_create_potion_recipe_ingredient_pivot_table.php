@@ -16,8 +16,9 @@ class CreatePotionRecipeIngredientPivotTable extends Migration
         Schema::create('potion_recipe_ingredient', function (Blueprint $table) {
             $table->unsignedBigInteger('potion_recipe_id');
             $table->unsignedBigInteger('ingredient_id');
-            $table->unsignedInteger('amount');
-            $table->string('measurement_unit');
+            $table->unsignedInteger('amount')->nullable();
+            $table->string('measurement_unit')->nullable();
+            $table->unsignedBigInteger('named_amount_id')->nullable();
 
             $table->primary(['potion_recipe_id', 'ingredient_id']);
 
@@ -27,6 +28,10 @@ class CreatePotionRecipeIngredientPivotTable extends Migration
 
             $table->foreign('ingredient_id')
                 ->on('ingredients')->references('id')
+                ->onUpdate('cascade')->onDelete('restrict');
+
+            $table->foreign('named_amount_id')
+                ->on('named_amounts')->references('id')
                 ->onUpdate('cascade')->onDelete('restrict');
         });
     }

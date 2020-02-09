@@ -32,10 +32,17 @@ class PotionRecipesController extends Controller
 
         $ingredients = collect($request->get('ingredients'))
             ->mapWithKeys(function (array $item) {
-                return [$item["id"] => ['amount' => $item['amount'], 'measurement_unit' => $item['measurement_unit']]];
+                return [
+                    $item["id"] => [
+                        'amount' => $item['amount'],
+                        'measurement_unit' => $item['measurement_unit'],
+                        'named_amount_id' => $item['named_amount_id'],
+                    ],
+                ];
             });
 
         $recipe->ingredients()->attach($ingredients);
+        $recipe->equipment()->attach($request->get('equipment'));
 
         return new PotionRecipeResource($recipe);
     }
@@ -51,7 +58,7 @@ class PotionRecipesController extends Controller
         if (is_null($recipe))
             abort(404);
 
-        $recipe->load('ingredients');
+        $recipe->load(['ingredients', 'equipment']);
 
         return new PotionRecipeResource($recipe);
     }
@@ -73,10 +80,20 @@ class PotionRecipesController extends Controller
         if ($request->has('ingredients')) {
             $ingredients = collect($request->get('ingredients'))
                 ->mapWithKeys(function (array $item) {
-                    return [$item["id"] => ['amount' => $item['amount'], 'measurement_unit' => $item['measurement_unit']]];
+                    return [
+                        $item["id"] => [
+                            'amount' => $item['amount'],
+                            'measurement_unit' => $item['measurement_unit'],
+                            'named_amount_id' => $item['named_amount_id'],
+                        ],
+                    ];
                 });
 
             $recipe->ingredients()->sync($ingredients);
+        }
+
+        if ($request->has('equipment')) {
+            $recipe->equipment()->sync($request->get('equipment'));
         }
     }
 }
