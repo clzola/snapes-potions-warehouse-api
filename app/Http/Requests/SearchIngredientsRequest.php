@@ -30,6 +30,7 @@ class SearchIngredientsRequest extends FormRequest
                 'required_with:sort',
                 'string',
                 Rule::in([
+                    'id',
                     'name',
                     'created_at',
                     'updated_at',
