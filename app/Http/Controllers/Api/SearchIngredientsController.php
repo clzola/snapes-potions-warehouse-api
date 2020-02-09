@@ -32,7 +32,7 @@ class SearchIngredientsController extends Controller
                 foreach ($sort as $sortBy)
                     $builder->orderBy($sortBy['column'], $sortBy['direction']);
             })
-            ->paginate($request->get('per_page'));
+            ->paginate($request->get('per_page', 20));
 
         return IngredientResource::collection($ingredients);
     }
