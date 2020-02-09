@@ -49,15 +49,11 @@ class PotionRecipesController extends Controller
 
 
     /**
-     * @param Potion $potion
+     * @param PotionRecipe $recipe
      * @return PotionRecipeResource
      */
-    public function show(Potion $potion)
+    public function show(PotionRecipe $recipe)
     {
-        $recipe = $potion->potionRecipe;
-        if (is_null($recipe))
-            abort(404);
-
         $recipe->load(['ingredients', 'equipment']);
 
         return new PotionRecipeResource($recipe);
@@ -65,15 +61,11 @@ class PotionRecipesController extends Controller
 
 
     /**
-     * @param Potion $potion
+     * @param PotionRecipe $recipe
      * @param UpdatePotionRecipeRequest $request
      */
-    public function update(Potion $potion, UpdatePotionRecipeRequest $request)
+    public function update(PotionRecipe $recipe, UpdatePotionRecipeRequest $request)
     {
-        $recipe = $potion->potionRecipe;
-        if (is_null($recipe))
-            abort(400, 'Cannot update potion recipe because it does not exist');
-
         $recipe->fill($request->all());
         $recipe->save();
 
@@ -95,5 +87,17 @@ class PotionRecipesController extends Controller
         if ($request->has('equipment')) {
             $recipe->equipment()->sync($request->get('equipment'));
         }
+    }
+
+    /**
+     * @param PotionRecipe $recipe
+     * @return \Illuminate\Http\Response
+     * @throws \Exception
+     */
+    public function destroy(PotionRecipe $recipe)
+    {
+        $recipe->delete();
+
+        return response()->noContent();
     }
 }
