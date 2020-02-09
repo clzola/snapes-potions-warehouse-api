@@ -33,8 +33,4 @@ Route::apiResource('/potion-difficulty-levels', 'PotionDifficultyLevelsControlle
 Route::get('/potions/search', 'SearchPotionsController')->name('potions.search');
 Route::apiResource('/potions', 'PotionsController');
 
-
-Route::post('/potions/{potion}/recipe', 'PotionRecipesController@store')->name('potions.recipe.store');
-Route::get('/recipes/{recipe}', 'PotionRecipesController@show')->name('potions.recipe.show');
-Route::put('/recipes/{recipe}', 'PotionRecipesController@update')->name('potions.recipe.update');
-Route::delete('/recipes/{recipe}', 'PotionRecipesController@destroy')->name('potions.recipe.destroy');
+Route::apiResource('/potions.recipes', 'PotionRecipesController')->shallow()->except(['index']);
