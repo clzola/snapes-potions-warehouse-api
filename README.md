@@ -1,4 +1,4 @@
-<p align="center"><img src="./logo.png" width="96"></p>
+<p align="center"><img src="./logo.png" width="128"></p>
 
 ## Snape's Potions Warehouse
 
