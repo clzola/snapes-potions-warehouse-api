@@ -1,12 +1,12 @@
 <p align="center"><img src="./logo.png"></p>
 
-# Snape's Potions Warehouse
+## Snape's Potions Warehouse
 
 This is a hobby project. Idea is that Snape (a Hogwarts teacher) needs help with his potions.  
 He needs an application where he will track ingredients, potions and recipes he has in his warehouse along
 with additional information.
 
-## Deployment
+### Deployment
 
 1. Clone repository
 2. Run `composer install`
