@@ -2,9 +2,11 @@
 
 ## Snape's Potions Warehouse
 
-This is a hobby project. Idea is that Snape (a Hogwarts teacher) needs help with his potions.  
-He needs an application where he will track ingredients, potions and recipes he has in his warehouse along
-with additional information.
+Professor Snape, a Hogwarts teachers, needs help with organizing his potions warehouse.
+He needs a web application where he will be able to track information regarding amount of ingredients and
+potions in his warehouse. Also application needs to store recipe for each potion.  
+  
+Note: This is only back-end part of the application. To see frontend follow this [link](https://github.com/clzola/snapes-potions-warehouse-admin). 
 
 ### Deployment
 
