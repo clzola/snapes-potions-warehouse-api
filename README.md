@@ -1,4 +1,4 @@
-![snapes-potions-warehouse](./logo.png)
+<p align="center"><img src="./logo.png"></p>
 
 # Snape's Potions Warehouse
 
