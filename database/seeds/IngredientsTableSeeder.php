@@ -11,28 +11,20 @@ class IngredientsTableSeeder extends Seeder
      */
     public function run()
     {
-        \App\Ingredient::create([
-            "name" => "Ingredient 1",
-            "description" => "Lorem ipsum description",
-            "picture" => "asdasd.jpg",
-            "amount" => 5000,
-            "measurement_unit" => "g",
-        ]);
+        $this->copyPictures();
+        factory(\App\Ingredient::class, 70)->create();
+    }
 
-        \App\Ingredient::create([
-            "name" => "Ingredient 2",
-            "description" => "Lorem ipsum description",
-            "picture" => "asdasd.jpg",
-            "amount" => 5000,
-            "measurement_unit" => "g",
-        ]);
 
-        \App\Ingredient::create([
-            "name" => "Ingredient 3",
-            "description" => "Lorem ipsum description",
-            "picture" => "asdasd.jpg",
-            "amount" => 5000,
-            "measurement_unit" => "g",
-        ]);
+    private function copyPictures()
+    {
+        if(!Storage::exists("public/ingredients/pictures"))
+            Storage::makeDirectory("public/ingredients/pictures");
+
+        Storage::delete(Storage::allFiles("public/ingredients/pictures"));
+
+        collect(Storage::allFiles("seeds/ingredients/pictures"))->each(function($fileName) {
+            Storage::copy($fileName, "public/ingredients/pictures/" . basename($fileName));
+        });
     }
 }
