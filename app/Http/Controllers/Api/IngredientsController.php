@@ -103,7 +103,7 @@ class IngredientsController extends Controller
      * @param array $cropParameters
      * @param StoreIngredientPictureService $service
      */
-    protected function storeIngredientPicture(Ingredient $ingredient, UploadedFile $uploadedFile, array $cropParameters, StoreIngredientPictureService $service)
+    protected function storeIngredientPicture(Ingredient $ingredient, UploadedFile $uploadedFile, $cropParameters, StoreIngredientPictureService $service)
     {
         $pictureFileName = $service->store(
             $uploadedFile,
@@ -121,7 +121,7 @@ class IngredientsController extends Controller
      * @param StoreIngredientPictureService $service
      * @return null|string
      */
-    protected function replaceIngredientPicture(Ingredient $ingredient, UploadedFile $uploadedFile, array $cropParameters, StoreIngredientPictureService $service)
+    protected function replaceIngredientPicture(Ingredient $ingredient, UploadedFile $uploadedFile, $cropParameters, StoreIngredientPictureService $service)
     {
         if (is_null($uploadedFile))
             return null;
